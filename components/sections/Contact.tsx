@@ -65,11 +65,27 @@ export function Contact() {
     e.preventDefault();
     setFormStatus("sending");
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setFormStatus("sent");
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-    // Reset after showing success
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+      });
+
+      if (response.ok) {
+        setFormStatus("sent");
+        form.reset();
+      } else {
+        setFormStatus("error");
+      }
+    } catch {
+      setFormStatus("error");
+    }
+
+    // Reset after showing success/error
     setTimeout(() => setFormStatus("idle"), 3000);
   };
 
@@ -100,7 +116,14 @@ export function Contact() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+              <input type="hidden" name="form-name" value="contact" />
               <div>
                 <label
                   htmlFor="name"
