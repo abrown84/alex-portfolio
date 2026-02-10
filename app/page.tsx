@@ -8,6 +8,7 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
+import { Spotlight } from "@/components/effects/Spotlight";
 import { KonamiCode } from "@/components/easter-eggs/KonamiCode";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       {/* Effects */}
       <CustomCursor />
       <ScrollProgress />
+      <Spotlight className="fixed inset-0 z-[5]" size={600} />
       <KonamiCode />
 
       {/* Navigation */}

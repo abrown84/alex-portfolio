@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Scene } from "@/components/three/Scene";
 import { FloatingShapes } from "@/components/three/FloatingShapes";
-import { Spotlight } from "@/components/effects/Spotlight";
 import { useMousePosition } from "@/hooks/useMousePosition";
 import { useIsMobile } from "@/hooks/useMediaQuery";
 
@@ -51,9 +50,6 @@ export function Hero() {
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background z-10 pointer-events-none" />
-
-      {/* Spotlight effect */}
-      <Spotlight className="z-[15]" size={600} />
 
       {/* Mobile gradient background */}
       {isMobile && (
